@@ -19,4 +19,9 @@ switch ($command) {
     }
     "create" { migrate create -ext sql -dir migrations -seq $name }
     "force" { migrate -path migrations -database $env:DATABASE_URL force $name }
+    default {
+        Write-Host "Unknown command: $command"
+        Write-Host "Available commands: up|down|create|force"
+        exit 1
+    }
 }
