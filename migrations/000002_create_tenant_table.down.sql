@@ -1,0 +1,2 @@
+DROP TABLE IF EXISTS tenants;
+DROP TYPE IF EXISTS payment_plan;
