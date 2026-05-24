@@ -11,5 +11,10 @@ CREATE TABLE IF NOT EXISTS api_keys(
     created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
 );
 
+ALTER TABLE api_keys ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY api_keys_tenant_isolation
+ON api_keys
+USING (tenant_id = current_setting('app.current_id',true)::UUID);
+
 CREATE INDEX idx_api_keys_tenant ON api_keys(tenant_id);
-CREATE INDEX idx_api_keys_hash ON api_keys(key_hash);
